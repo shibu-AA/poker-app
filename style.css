@@ -1,0 +1,78 @@
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: green;   /* ← 背景を黒にする */
+  color: white;              /* ← 文字が読めるように白にする（必要なら） */
+}
+
+#table {
+  width: 90vw; /* ✅ 画面幅の90%にする（vw = viewport width） */
+  max-width: 1500px;  /* 最大サイズ制限（必要なら） */
+  height: auto;       /* 画像比率に合わせて自動調整したい場合 */
+  aspect-ratio: 5.35 / 1;  /* ✅ 幅:高さの比率（例：3:1） */
+  margin: 20px auto;
+  background-image: url('image/ポーカーテーブル.png');  /* ✅ 背景画像を指定 */
+  background-size: cover;                                 /* 画像を全体に広げる */
+  background-position: center;                            /* 中央に配置 */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+#community-cards,#player-hand {
+  display: flex;
+  flex-direction: row;   /* 横方向に並べる */
+  justify-content: center;
+  flex-wrap: wrap;       /* 多すぎたら折り返す */
+  gap: 10px;             /* カード間のスペース */
+}
+
+
+.card {
+  position: relative;
+  width: 120px;
+  height: 180px;
+  margin: 5px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  color: white; /* 白文字 */
+  font-weight: bold;
+  box-shadow: 2px 2px 5px rgba(0,0,0,0.2);
+}
+
+/* 背景画像 */
+.card.spade {
+  background-image: url('image/card_image/カード_スペード.png');
+}
+.card.heart {
+  background-image: url('image/card_image/カード_ハート.png');
+}
+.card.diamond {
+  background-image: url('image/card_image/カード_ダイヤ.png');
+}
+.card.club {
+  background-image: url('image/card_image/カード_クラブ.png');
+}
+
+/* 文字の位置調整 */
+.suit {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  font-size: 1.2em;
+}
+.rank {
+  position: relative;
+  font-size: 6em;
+  font-family: 'monospace', monospace;
+  color: white;
+  text-align: center;
+}
