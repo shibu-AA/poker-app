@@ -50,25 +50,20 @@ body {
 
 /* 背景画像 */
 .card.spade {
-  background-image: url('image/card_image/カード_スペード.png');
+  background-image: url('image/card_image/card_spades.png');
 }
 .card.heart {
-  background-image: url('image/card_image/カード_ハート.png');
+  background-image: url('image/card_image/card_hearts.png');
 }
 .card.diamond {
-  background-image: url('image/card_image/カード_ダイヤ.png');
+  background-image: url('image/card_image/card_diamonds.png');
 }
 .card.club {
-  background-image: url('image/card_image/カード_クラブ.png');
+  background-image: url('image/card_image/card_clubs.png');
 }
 
 /* 文字の位置調整 */
-.suit {
-  position: absolute;
-  top: 8px;
-  left: 10px;
-  font-size: 1.2em;
-}
+
 .rank {
   position: relative;
   font-size: 6em;
@@ -76,3 +71,15 @@ body {
   color: white;
   text-align: center;
 }
+
+.rank-img {
+  width: 100px;
+  height: auto;
+  position: absolute;
+  top: 50%;                    /* 上下中央の基準点 */
+  left: 50%;                   /* 左右中央の基準点 */
+  transform: translate(-50%, -50%);  /* 中心に合わせてずらす */
+  pointer-events: none;        /* クリック無効化 */
+}
+
+

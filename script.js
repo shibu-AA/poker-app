@@ -1,5 +1,5 @@
 const suits = ["♠", "♥", "♦", "♣"];
-const ranks = ["Ａ", "２", "３", "４", "５", "６", "７", "８", "９", "10", "Ｊ", "Ｑ", "Ｋ"];
+const ranks = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "T", "J", "Q", "K"];
 
 function createDeck() {
     let deck = [];
@@ -23,14 +23,23 @@ function createCardElement(card) {
   const cardEl = document.createElement("div");
   cardEl.className = "card";
 
-  const rankEl = document.createElement("div");
-  rankEl.className = "rank";
-  rankEl.textContent = card.rank;
+  // ランク画像の追加
+  const rankImg = document.createElement("img");
+  const rankKey = card.rank === "10" ? "10" :
+                  card.rank === "Ａ" ? "A" :
+                  card.rank === "Ｊ" ? "J" :
+                  card.rank === "Ｑ" ? "Q" :
+                  card.rank === "Ｋ" ? "K" :
+                  card.rank;  // "２"〜"９"
+  rankImg.src = `image/card_image/card_${rankKey}.png`;
+  rankImg.className = "rank-img";
 
+  // スート記号（左上表示のままでもよければそのまま）
   const suitEl = document.createElement("div");
   suitEl.className = "suit";
-  suitEl.textContent = card.suit;
 
+
+  // スートに応じた背景
   switch (card.suit) {
     case "♠": cardEl.classList.add("spade"); break;
     case "♥": cardEl.classList.add("heart"); break;
@@ -39,9 +48,10 @@ function createCardElement(card) {
   }
 
   cardEl.appendChild(suitEl);
-  cardEl.appendChild(rankEl);
+  cardEl.appendChild(rankImg);
   return cardEl;
 }
+
 
 function displayBackCards(count, elementId) {
   const container = document.getElementById(elementId);
@@ -49,46 +59,26 @@ function displayBackCards(count, elementId) {
   for (let i = 0; i < count; i++) {
     const cardEl = document.createElement("div");
     cardEl.className = "card";
-    cardEl.style.backgroundImage = "url('image/card_image/カード_裏.png')";
+    cardEl.style.backgroundImage = "url('image/card_image/card_back.png')";
     container.appendChild(cardEl);
   }
 }
 
 
 function displayHand(hand, elementId) {
-    const container = document.getElementById(elementId);
-    container.innerHTML = "";
-    hand.forEach(card => {
-        const cardEl = document.createElement("div");
-        cardEl.className = "card";
-
-        const rankEl = document.createElement("div");
-        rankEl.className = "rank";
-        rankEl.textContent = card.rank;
-
-        const suitEl = document.createElement("div");
-        suitEl.className = "suit";
-        suitEl.textContent = card.suit;
-
-        switch (card.suit) {
-            case "♠": cardEl.classList.add("spade"); break;
-            case "♥": cardEl.classList.add("heart"); break;
-            case "♦": cardEl.classList.add("diamond"); break;
-            case "♣": cardEl.classList.add("club"); break;
-        }
-
-        cardEl.appendChild(suitEl);
-        cardEl.appendChild(rankEl);
-        container.appendChild(cardEl);
-
-    });
+  const container = document.getElementById(elementId);
+  container.innerHTML = "";
+  hand.forEach(card => {
+    const cardEl = createCardElement(card);  // ✅ 画像付きカード生成を使う
+    container.appendChild(cardEl);
+  });
 }
 
 
 const rankValues = {
-  "２": 2, "３": 3, "４": 4, "５": 5, "６": 6,
-  "７": 7, "８": 8, "９": 9, "10": 10,
-  "Ｊ": 11, "Ｑ": 12, "Ｋ": 13, "Ａ": 14,
+  "2": 2, "3": 3, "4": 4, "5": 5, "6": 6,
+  "7": 7, "8": 8, "9": 9, "T": 10,
+  "J": 11, "Q": 12, "K": 13, "A": 14,
 };
 
 const handRanks = {
